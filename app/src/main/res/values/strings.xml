@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AppClimaEdwin</string>
+    <string name="error_internet">Upps! No hay internet</string>
+</resources>
