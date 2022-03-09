@@ -21,7 +21,7 @@ fun mensajeEmergente(activity: Activity, mensaje: String){
 
 
 //Hay internet o no
-fun estaEnLinea(context: Context): Boolean{
+fun isOnline(context: Context): Boolean{
     val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
     if(capabilities != null){
