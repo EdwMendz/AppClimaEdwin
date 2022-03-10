@@ -1,4 +1,4 @@
-package mx.kodemia.appclimaedwin
+package mx.kodemia.appclimaedwin.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +9,7 @@ import coil.load
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import mx.kodemia.appclimaedwin.R
 import mx.kodemia.appclimaedwin.databinding.ActivityMainBinding
 import mx.kodemia.appclimaedwin.extra.isOnline
 import mx.kodemia.appclimaedwin.extra.mensajeEmergente
@@ -29,10 +30,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        lanzarPeticion()
+        petition()
     }
 
-fun lanzarPeticion(){
+fun petition(){
     if(isOnline(applicationContext)) {
         showViews(true, false)
         lifecycleScope.launch {
@@ -61,7 +62,7 @@ fun lanzarPeticion(){
         //Ahora le pasare long ciudad y el appid
         service.getWheterById(
             3523202L,"metric","sp",
-            "7315adee6f294c42a82154aced02171d"
+            ""
         )
     }
 

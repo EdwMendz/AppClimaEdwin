@@ -1,5 +1,10 @@
 package mx.kodemia.appclimaedwin.network
 
+import mx.kodemia.appclimaedwin.model.Main
+import mx.kodemia.appclimaedwin.model.Sys
+import mx.kodemia.appclimaedwin.model.Weather
+import mx.kodemia.appclimaedwin.model.Wind
+
 data class WeatherEntity(
     val base: String,
     val main: Main,
