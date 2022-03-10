@@ -3,7 +3,9 @@ package mx.kodemia.appclimaedwin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import coil.load
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -40,7 +42,7 @@ fun lanzarPeticion(){
 
     private suspend fun getWeather(): WeatherEntity = withContext(Dispatchers.IO)
     {
-        showViews(true)
+        showViews(true,false)
 
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("https://api.openweathermap.org/")
@@ -63,28 +65,31 @@ fun lanzarPeticion(){
             val cityName = weatherEntity.name
             val country = weatherEntity.sys.country
             val addres = "$cityName, $country"
+            val status = weatherEntity.weather[0].description.uppercase()
             val dateNow = Calendar.getInstance().time
             val tempMin = "Min: ${weatherEntity.main.temp_min.toInt()}°"
             val tempMax = "Max: ${weatherEntity.main.temp_max.toInt()}°"
-
+            val icon = weatherEntity.weather[0].icon
+            val iconUrl = "https://openweathermap.org/img/w/$icon.png"
 
             binding.apply {
-                tvTemperatura.text=temp
-                tvAddress.text=cityName
-                tvDate.text=addres
-                //tvDate.text=dateNow
-                tvTempMax.text=tempMax
-                tvTempMin.text=tempMin
+                tvAddress.text = addres
+                tvDate.text = dateNow.toString()
+                tvTemperatura.text = temp
+                tvStatus.text = status
+                tvTempMin.text = tempMin
+                tvTempMax.text = tempMax
+                ivLogo1.load(iconUrl)
             }
-
         }catch (exception:Exception){
             showError("Ha oucrrido un error")
         }
 
     }
 
-    private fun showViews(message:Boolean){
-
+    private fun showViews(progresVisible:Boolean, imageVisible:Boolean){
+        binding.progressBarIndicator.isVisible = progresVisible
+        binding.ivSun.isVisible = imageVisible
     }
     private fun showError(message:String){
         Toast.makeText(this,message,Toast.LENGTH_LONG).show()

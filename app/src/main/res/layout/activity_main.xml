@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/lluvia_imagen"
+    android:background="@drawable/bg_camino"
     tools:context=".MainActivity"
     >
     <TextView
         android:id="@+id/tv_address"
-        style="@style/TextAppearance.MaterialComponents.Headline4"
+        android:fontFamily="@font/karla_extrabold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,11 +25,12 @@
 
     <TextView
         android:id="@+id/tv_date"
-        style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:fontFamily="@font/karla_extrabold"
         app:layout_constraintEnd_toEndOf="@+id/tv_address"
         app:layout_constraintStart_toStartOf="@+id/tv_address"
         app:layout_constraintTop_toBottomOf="@+id/tv_address"
@@ -37,11 +39,12 @@
 
     <TextView
         android:id="@+id/tv_status"
-        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:fontFamily="@font/karla_extrabolditalic"
+        android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.417"
         app:layout_constraintStart_toEndOf="@+id/iv_sun"
@@ -63,11 +66,12 @@
 
     <TextView
         android:id="@+id/tv_temperatura"
-        style="@style/TextAppearance.MaterialComponents.Headline1"
+        android:fontFamily="@font/karla_bold"
+        android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/tv_status"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tv_status"
@@ -82,7 +86,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/tv_tempMax"
         app:layout_constraintStart_toEndOf="@+id/iv_sun"
         app:layout_constraintTop_toBottomOf="@+id/tv_temperatura"
@@ -96,7 +100,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="32dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_tempMin"
         app:layout_constraintTop_toBottomOf="@+id/tv_temperatura"
@@ -115,7 +119,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.632"
-        tools:visibility="invisible" />
+        tools:visibility="visible"/>
 
     <ImageView
         android:id="@+id/iv_logo1"
@@ -133,7 +137,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:cardElevation="20dp"
+        app:cardElevation="30dp"
+        app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -143,9 +148,19 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/fondo_card">
+            android:background="@color/black">
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/fondo_card"
+            >
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </com.google.android.material.card.MaterialCardView>
 
 
