@@ -1,4 +1,4 @@
-package mx.kodemia.appclimaedwin.network
+package mx.kodemia.appclimaedwin.model
 
 data class Weather(
     val main: String,

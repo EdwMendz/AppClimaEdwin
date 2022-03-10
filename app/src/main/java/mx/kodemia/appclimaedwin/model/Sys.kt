@@ -1,4 +1,4 @@
-package mx.kodemia.appclimaedwin.network
+package mx.kodemia.appclimaedwin.model
 
 data class Sys(
     val sunrise: Long,

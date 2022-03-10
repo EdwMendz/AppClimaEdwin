@@ -1,4 +1,4 @@
-package mx.kodemia.appclimaedwin
+package mx.kodemia.appclimaedwin.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +9,7 @@ import coil.load
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import mx.kodemia.appclimaedwin.R
 import mx.kodemia.appclimaedwin.databinding.ActivityMainBinding
 import mx.kodemia.appclimaedwin.extra.isOnline
 import mx.kodemia.appclimaedwin.extra.mensajeEmergente
@@ -23,17 +24,16 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private var units = false
-    private var language = false
 
     private lateinit var binding:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        lanzarPeticion()
+        petition()
     }
 
-fun lanzarPeticion(){
+fun petition(){
     if(isOnline(applicationContext)) {
         showViews(true, false)
         lifecycleScope.launch {
@@ -49,7 +49,6 @@ fun lanzarPeticion(){
 
     private suspend fun getWeather(): WeatherEntity = withContext(Dispatchers.IO)
     {
-        var languageCode = "es"
         showViews(true,false)
 
         val retrofit: Retrofit = Retrofit.Builder()
@@ -63,7 +62,7 @@ fun lanzarPeticion(){
         //Ahora le pasare long ciudad y el appid
         service.getWheterById(
             3523202L,"metric","sp",
-            "7315adee6f294c42a82154aced02171d"
+            ""
         )
     }
 
@@ -99,7 +98,7 @@ fun lanzarPeticion(){
             val wind = "${weatherEntity.wind.speed} km/h"
             val pressure = "${weatherEntity.main.pressure} mb"
             val humidity = "${weatherEntity.main.pressure}%"
-            //val feelsLike = getString(R.string.sensation) + weatherEntity.main.feels_like.toInt() + unitSymbol
+            val feelsLike = getString(R.string.sensacion) + weatherEntity.main.feels_like.toInt() + unitSymbol
             binding.apply {
                 tvAddress.text = addres
                 tvDate.text = updateAt
@@ -112,7 +111,7 @@ fun lanzarPeticion(){
                 tvWind.text = wind
                 tvPressure.text = pressure
                 tvHumidity.text = humidity
-                //feelsLikeTextView.text = feelsLike
+                tvFeelsLike.text = feelsLike
 
                 ivLogo1.load(iconUrl)
                 detailsContainer.isVisible = true
@@ -130,7 +129,7 @@ fun lanzarPeticion(){
         binding.progressBarIndicator.isVisible = progresVisible
         binding.ivSun.isVisible = imageVisible
     }
-    private fun showError(message:String){
-        Toast.makeText(this,message,Toast.LENGTH_LONG).show()
+    private fun showError(message2:String){
+        Toast.makeText(this,message2,Toast.LENGTH_LONG).show()
     }
 }
