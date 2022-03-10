@@ -1,4 +1,19 @@
 <resources>
-    <string name="app_name">AppClimaEdwin</string>
     <string name="error_internet">Upps! No hay internet</string>
+
+    <string name="dev_name">Edwin</string>
+    <string name="logo">AppClimaEdwin</string>
+    <string name="updated">Actualizado: "</string>
+    <string name="sensacion">Sensacion: "</string>
+    <string name="error_ocurred">An occurred when loading data</string>
+    <string name="hello">Hello</string>
+    <string name="imagesun">imageSun</string>
+    <string name="imageclima">ImageClima</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="autor">Autor</string>
+    <string name="humedad">Humedad</string>
+    <string name="presion">Presion</string>
+    <string name="viento">Viento</string>
+    <string name="puestasol">PuestaSol</string>
+    <string name="Amanecer">amanecer</string>
 </resources>
