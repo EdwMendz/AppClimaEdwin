@@ -23,7 +23,6 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private var units = false
-    private var language = false
 
     private lateinit var binding:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +48,6 @@ fun lanzarPeticion(){
 
     private suspend fun getWeather(): WeatherEntity = withContext(Dispatchers.IO)
     {
-        var languageCode = "es"
         showViews(true,false)
 
         val retrofit: Retrofit = Retrofit.Builder()
@@ -99,7 +97,7 @@ fun lanzarPeticion(){
             val wind = "${weatherEntity.wind.speed} km/h"
             val pressure = "${weatherEntity.main.pressure} mb"
             val humidity = "${weatherEntity.main.pressure}%"
-            //val feelsLike = getString(R.string.sensation) + weatherEntity.main.feels_like.toInt() + unitSymbol
+            val feelsLike = getString(R.string.sensacion) + weatherEntity.main.feels_like.toInt() + unitSymbol
             binding.apply {
                 tvAddress.text = addres
                 tvDate.text = updateAt
@@ -112,7 +110,7 @@ fun lanzarPeticion(){
                 tvWind.text = wind
                 tvPressure.text = pressure
                 tvHumidity.text = humidity
-                //feelsLikeTextView.text = feelsLike
+                tvFeelsLike.text = feelsLike
 
                 ivLogo1.load(iconUrl)
                 detailsContainer.isVisible = true
@@ -130,7 +128,7 @@ fun lanzarPeticion(){
         binding.progressBarIndicator.isVisible = progresVisible
         binding.ivSun.isVisible = imageVisible
     }
-    private fun showError(message:String){
-        Toast.makeText(this,message,Toast.LENGTH_LONG).show()
+    private fun showError(message2:String){
+        Toast.makeText(this,message2,Toast.LENGTH_LONG).show()
     }
 }
