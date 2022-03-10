@@ -20,6 +20,9 @@ import java.lang.Exception
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    private var language = false
+
     private lateinit var binding:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -30,18 +33,21 @@ class MainActivity : AppCompatActivity() {
 
 fun lanzarPeticion(){
     if(isOnline(applicationContext)) {
+        showViews(true, false)
         lifecycleScope.launch {
             apiResponse(getWeather())
         }
 
     }else {
         mensajeEmergente(this, getString(R.string.error_internet))
+        binding.detailsContainer.isVisible = false
     }
 }
 
 
     private suspend fun getWeather(): WeatherEntity = withContext(Dispatchers.IO)
     {
+        var languageCode = "es"
         showViews(true,false)
 
         val retrofit: Retrofit = Retrofit.Builder()
@@ -80,9 +86,13 @@ fun lanzarPeticion(){
                 tvTempMin.text = tempMin
                 tvTempMax.text = tempMax
                 ivLogo1.load(iconUrl)
+                detailsContainer.isVisible = true
+                cardContainer.isVisible = true
+                showViews(false, true)
             }
         }catch (exception:Exception){
             showError("Ha oucrrido un error")
+            showViews(false,true)
         }
 
     }

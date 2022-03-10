@@ -6,7 +6,7 @@
     <string name="sunset">Sunset</string>
     <string name="wind">Wind</string>
     <string name="created_by">Created</string>
-    <string name="dev_name">JCP</string>
+    <string name="dev_name">Edwin</string>
     <string name="pressure">Pressure</string>
     <string name="update">Update</string>
     <string name="humidity">Humidity</string>
@@ -25,4 +25,6 @@
     <string name="title_activity_settings">Settings Activity</string>
     <string name="settings_title">Settings</string>
     <string name="measure_metric">Unit</string>
+    <string name="imagesun">imageSun</string>
+    <string name="imageclima">ImageClima</string>
 </resources>
