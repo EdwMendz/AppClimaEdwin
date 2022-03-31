@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppClimaEdwin">
         <activity
-            android:name="mx.kodemia.appclimaedwin.ui.view.MainActivity"
+            android:name="mx.kodemia.appclimaedwin.ui.view.MainActivityView"
             android:exported="false" />
         <activity
             android:name="mx.kodemia.appclimaedwin.ui.view.SplashScreen"

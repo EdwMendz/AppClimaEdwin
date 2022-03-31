@@ -2,77 +2,43 @@ package mx.kodemia.appclimaedwin.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
+import android.view.View
+import androidx.activity.viewModels
 import coil.load
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import mx.kodemia.appclimaedwin.R
 import mx.kodemia.appclimaedwin.databinding.ActivityMainBinding
-import mx.kodemia.appclimaedwin.extra.isOnline
-import mx.kodemia.appclimaedwin.extra.messageEmer
-import mx.kodemia.appclimaedwin.data.network.ApiWeaterService
-import mx.kodemia.appclimaedwin.data.network.WeatherEntity
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.Exception
+import mx.kodemia.appclimaedwin.ui.viewModel.MianActivityViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivityView : AppCompatActivity() {
+    //ViewBinding
+    private lateinit var binding: ActivityMainBinding
+
+    //viewModel
+    val viewModel: MianActivityViewModel by viewModels()
+
+    //uniSimbol
+    val unitSymbol = "°F"
 
     private var units = false
 
-    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-       // petition()
+        initBinding()
+        observadores()
+
     }
 
-//    fun petition() {
-//        if (isOnline(applicationContext)) {
-//            showViews(true, false)
-//            lifecycleScope.launch {
-//                apiResponse(getWeather())
-//            }
-//
-//        } else {
-//            messageEmer(this, getString(R.string.error_internet))
-//            binding.detailsContainer.isVisible = false
-//        }
-//    }
 
-
-//    private suspend fun getWeather(): WeatherEntity = withContext(Dispatchers.IO)
-//    {
-//        showViews(true, false)
-//
-//        val retrofit: Retrofit = Retrofit.Builder()
-//            .baseUrl("https://api.openweathermap.org/")
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//
-//        val serviceApi: ApiWeaterService =
-//            retrofit.create(ApiWeaterService::class.java) // llamada para levantar servicio
-//
-//        //Ahora le pasare long ciudad y el appid
-//        serviceApi.getWheterById(
-//            3523202L, "metric", "sp",
-//            "1b96dc7f7bd358dc23b5d5926d7d2572"
-//        )
-//    }
-
-    private fun apiResponse(weatherEntity: WeatherEntity) {
-        var unitSymbol = "°C"
-        if (units) {
-            unitSymbol = "°F"
+    private fun observadores() {
+        viewModel.getWeather()
+        //Progresbar
+        viewModel.cargando.observe(this) { cargando ->
+            cargando(cargando)
         }
-
-        try {
+        //ViewModelweathereEntity
+        viewModel.weatherEntity.observe(this) { weatherEntity ->
             val temp = "${weatherEntity.main.temp.toInt()}$unitSymbol"
             val cityName = weatherEntity.name
             val country = weatherEntity.sys.country
@@ -119,23 +85,37 @@ class MainActivity : AppCompatActivity() {
                 tvFeelsLike.text = feelsLike
 
                 ivLogo1.load(iconUrl)
-                detailsContainer.isVisible = true
-                cardContainer.isVisible = true
-                showViews(false, true)
+//                detailsContainer.isVisible = true
+//                cardContainer.isVisible = true
+//                showViews(false, true)
+
             }
-        } catch (exception: Exception) {
-            showError("Ha oucrrido un error")
-            showViews(false, true)
+            //peticion
         }
-
     }
 
-    private fun showViews(progresVisible: Boolean, imageVisible: Boolean) {
-        binding.progressBarIndicator.isVisible = progresVisible
-        binding.ivSun.isVisible = imageVisible
+
+    //Mostrar ProgresBar e image
+    private fun cargando(cargando: Boolean) {
+        binding.apply {
+            if (cargando) {
+                progressBarIndicator.visibility = View.VISIBLE
+                ivSun.visibility = View.GONE
+                detailsContainer.visibility = View.GONE
+                cardContainer.visibility = View.GONE
+            } else {
+                progressBarIndicator.visibility = View.GONE
+                ivSun.visibility = View.VISIBLE
+                detailsContainer.visibility = View.VISIBLE
+                cardContainer.visibility = View.VISIBLE
+            }
+        }
     }
 
-    private fun showError(message2: String) {
-        Toast.makeText(this, message2, Toast.LENGTH_LONG).show()
+
+    //IniciarBinding
+    fun initBinding() {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 }

@@ -47,7 +47,7 @@ class SplashScreen : AppCompatActivity() {
                 splashScreenBinding.ivMoon.visibility = View.VISIBLE
 
                 Handler(Looper.getMainLooper()).postDelayed({
-                    val intent = Intent(this@SplashScreen, MainActivity::class.java)
+                    val intent = Intent(this@SplashScreen, MainActivityView::class.java)
                     startActivity(intent)
                     finish()
                 }, 2000)
