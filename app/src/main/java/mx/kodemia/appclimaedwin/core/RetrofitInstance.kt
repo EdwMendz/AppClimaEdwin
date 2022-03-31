@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
 
-    fun getRetrofit(): Retrofit {
+    fun getRetrofitWeather(): Retrofit {
         val okHttpClient = OkHttpClient.Builder()
             .readTimeout(60, TimeUnit.SECONDS)
             .connectTimeout(60, TimeUnit.SECONDS)

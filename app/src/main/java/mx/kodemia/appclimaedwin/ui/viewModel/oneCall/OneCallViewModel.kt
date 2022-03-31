@@ -1,47 +1,53 @@
-package mx.kodemia.appclimaedwin.ui.viewModel
+package mx.kodemia.appclimaedwin.ui.viewModel.oneCall
 
+import android.location.Location
 import android.util.Log
+import android.widget.Button
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import mx.kodemia.appclimaedwin.service.WeatherService
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import mx.kodemia.appclimaedwin.data.network.WeatherEntity
+import mx.kodemia.appclimaedwin.data.model.oneCall.OneCallEntity
+import mx.kodemia.appclimaedwin.data.network.openWeather.WeatherEntity
+import mx.kodemia.appclimaedwin.service.OpenWeatherService
 import java.io.IOException
 
+class OneCallViewModel: ViewModel() {
+    private val  serviceWeather = OpenWeatherService()
 
-class MianActivityViewModel : ViewModel() {
-
-    //Service
-    private val  serviceWeather = WeatherService()
+    private var latitude = ""
+    private var longitude = ""
 
     //LiveData
     val error = MutableLiveData<String>()
     val cargando = MutableLiveData<Boolean>()
-    val weatherEntity = MutableLiveData<WeatherEntity>()
+    val oneCallEntity = MutableLiveData<OneCallEntity>()
+    val button = MutableLiveData<Button>()
 
 
     /*Se realiza la peticion a la API,  MainActivitiViewModel Recibe la respuesta
     * despues se manda a la MainActivityView */
 
-    fun getWeather() {
+    fun getDatosOneCall() {
         viewModelScope.launch {
             cargando.postValue(true)
-            val response = serviceWeather.getDatos()
+            val response = serviceWeather.getDatosOneCall()
             //Validacion
             try {
                 if (response.isSuccessful){
-                    weatherEntity.postValue(response.body())
+                    oneCallEntity.postValue(response.body())
                 }else {
                     error.postValue(response.message())
-                    Log.e("Something paso", "Ago paso")
+                    Log.e("Something paso", "Algo Malo paso en paso")
                 }
                 cargando.postValue(false)
-            }catch (error1:IOException){
+            }catch (error1: IOException){
                 error.postValue(error1.localizedMessage)
                 cargando.postValue(false)
             }
         }
     }
+
+
 
 }

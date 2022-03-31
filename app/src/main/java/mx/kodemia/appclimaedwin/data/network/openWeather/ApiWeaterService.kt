@@ -1,5 +1,6 @@
-package mx.kodemia.appclimaedwin.data.network
+package mx.kodemia.appclimaedwin.data.network.openWeather
 
+import mx.kodemia.appclimaedwin.data.model.oneCall.CityEntity
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -13,6 +13,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import mx.kodemia.appclimaedwin.R
 import mx.kodemia.appclimaedwin.databinding.ActivitySplashScreenBinding
+import mx.kodemia.appclimaedwin.ui.view.currentWeather.MainActivityView
 
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

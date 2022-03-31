@@ -1,4 +1,4 @@
-package mx.kodemia.appclimaedwin.data.model
+package mx.kodemia.appclimaedwin.data.model.openWeather
 
 data class Main(
     val temp:Double,

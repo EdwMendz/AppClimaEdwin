@@ -1,5 +1,6 @@
-package mx.kodemia.appclimaedwin.ui.view
+package mx.kodemia.appclimaedwin.ui.view.currentWeather
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -7,7 +8,8 @@ import androidx.activity.viewModels
 import coil.load
 import mx.kodemia.appclimaedwin.R
 import mx.kodemia.appclimaedwin.databinding.ActivityMainBinding
-import mx.kodemia.appclimaedwin.ui.viewModel.MianActivityViewModel
+import mx.kodemia.appclimaedwin.ui.view.oneCall.OnecallActivityView
+import mx.kodemia.appclimaedwin.ui.viewModel.currentWeather.MianActivityViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,6 +29,7 @@ class MainActivityView : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         initBinding()
         observadores()
+        button()
 
     }
 
@@ -95,7 +98,7 @@ class MainActivityView : AppCompatActivity() {
     }
 
 
-    //Mostrar ProgresBar e image
+    //Mostrar ProgresBar e imagenes
     private fun cargando(cargando: Boolean) {
         binding.apply {
             if (cargando) {
@@ -103,19 +106,34 @@ class MainActivityView : AppCompatActivity() {
                 ivSun.visibility = View.GONE
                 detailsContainer.visibility = View.GONE
                 cardContainer.visibility = View.GONE
+                btnInicio.visibility = View.GONE
             } else {
                 progressBarIndicator.visibility = View.GONE
                 ivSun.visibility = View.VISIBLE
                 detailsContainer.visibility = View.VISIBLE
                 cardContainer.visibility = View.VISIBLE
+                btnInicio.visibility = View.VISIBLE
             }
         }
     }
 
 
     //IniciarBinding
-    fun initBinding() {
+    private fun initBinding() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+    }
+
+    //LanzarACtivityButton
+    private fun lanzarActivity(){
+        val intent= Intent(this@MainActivityView, OnecallActivityView::class.java)
+        startActivity(intent)
+    }
+
+    //lanzar button
+    private fun button(){
+        binding.btnInicio.setOnClickListener {
+            lanzarActivity()
+        }
     }
 }
