@@ -1,4 +1,4 @@
-package mx.kodemia.appclimaedwin.model
+package mx.kodemia.appclimaedwin.data.model
 
 data class Main(
     val temp:Double,

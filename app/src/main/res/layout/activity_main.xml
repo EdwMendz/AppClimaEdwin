@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_camino"
-    tools:context=".view.MainActivity"
+    tools:context=".ui.view.MainActivity"
     >
     <ScrollView
         android:layout_width="match_parent"
@@ -78,9 +78,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:fontFamily="@font/karla_bold"
+                android:fontFamily="@font/karla_extrabold"
                 android:textColor="@color/white"
-                android:textSize="50sp"
+                android:textSize="40sp"
                 app:layout_constraintEnd_toEndOf="@+id/tv_status"
                 app:layout_constraintHorizontal_bias="0.581"
                 app:layout_constraintStart_toStartOf="@+id/tv_status"
@@ -89,10 +89,11 @@
 
             <TextView
                 android:id="@+id/tv_tempMin"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:fontFamily="@font/karla_extrabold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:textSize="24sp"
                 android:layout_marginTop="36dp"
                 android:layout_marginEnd="16dp"
                 android:textColor="@color/white"
@@ -103,7 +104,8 @@
 
             <TextView
                 android:id="@+id/tv_tempMax"
-                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:fontFamily="@font/karla_extrabold"
+                android:textSize="24sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -455,7 +457,8 @@
 
     <TextView
         android:id="@+id/tv_feelsLike"
-        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:fontFamily="@font/karla_extrabold"
+        android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"

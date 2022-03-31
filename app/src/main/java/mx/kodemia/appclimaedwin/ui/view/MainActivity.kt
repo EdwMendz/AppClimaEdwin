@@ -1,4 +1,4 @@
-package mx.kodemia.appclimaedwin.view
+package mx.kodemia.appclimaedwin.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,9 +12,9 @@ import kotlinx.coroutines.withContext
 import mx.kodemia.appclimaedwin.R
 import mx.kodemia.appclimaedwin.databinding.ActivityMainBinding
 import mx.kodemia.appclimaedwin.extra.isOnline
-import mx.kodemia.appclimaedwin.extra.mensajeEmergente
-import mx.kodemia.appclimaedwin.network.WeaterService
-import mx.kodemia.appclimaedwin.network.WeatherEntity
+import mx.kodemia.appclimaedwin.extra.messageEmer
+import mx.kodemia.appclimaedwin.data.network.ApiWeaterService
+import mx.kodemia.appclimaedwin.data.network.WeatherEntity
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.Exception
@@ -25,50 +25,50 @@ class MainActivity : AppCompatActivity() {
 
     private var units = false
 
-    private lateinit var binding:ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        petition()
+       // petition()
     }
 
-fun petition(){
-    if(isOnline(applicationContext)) {
-        showViews(true, false)
-        lifecycleScope.launch {
-            apiResponse(getWeather())
-        }
+//    fun petition() {
+//        if (isOnline(applicationContext)) {
+//            showViews(true, false)
+//            lifecycleScope.launch {
+//                apiResponse(getWeather())
+//            }
+//
+//        } else {
+//            messageEmer(this, getString(R.string.error_internet))
+//            binding.detailsContainer.isVisible = false
+//        }
+//    }
 
-    }else {
-        mensajeEmergente(this, getString(R.string.error_internet))
-        binding.detailsContainer.isVisible = false
-    }
-}
 
+//    private suspend fun getWeather(): WeatherEntity = withContext(Dispatchers.IO)
+//    {
+//        showViews(true, false)
+//
+//        val retrofit: Retrofit = Retrofit.Builder()
+//            .baseUrl("https://api.openweathermap.org/")
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//
+//        val serviceApi: ApiWeaterService =
+//            retrofit.create(ApiWeaterService::class.java) // llamada para levantar servicio
+//
+//        //Ahora le pasare long ciudad y el appid
+//        serviceApi.getWheterById(
+//            3523202L, "metric", "sp",
+//            "1b96dc7f7bd358dc23b5d5926d7d2572"
+//        )
+//    }
 
-    private suspend fun getWeather(): WeatherEntity = withContext(Dispatchers.IO)
-    {
-        showViews(true,false)
-
-        val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("https://api.openweathermap.org/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val service:WeaterService =
-            retrofit.create(WeaterService::class.java) // llamada para levantar servicio
-
-        //Ahora le pasare long ciudad y el appid
-        service.getWheterById(
-            3523202L,"metric","sp",
-            ""
-        )
-    }
-
-    private fun apiResponse(weatherEntity:WeatherEntity){
+    private fun apiResponse(weatherEntity: WeatherEntity) {
         var unitSymbol = "°C"
-        if(units){
+        if (units) {
             unitSymbol = "°F"
         }
 
@@ -79,26 +79,31 @@ fun petition(){
             val addres = "$cityName, $country"
             val weatherDescription = weatherEntity.weather[0].description
             var status = ""
-            if (weatherDescription.isNotEmpty()){
-                 status = weatherEntity.weather[0].description.uppercase()
+            if (weatherDescription.isNotEmpty()) {
+                status = weatherEntity.weather[0].description.uppercase()
             }
             val dt = weatherEntity.dt
 
-            val updateAt = getString(R.string.updated)+ SimpleDateFormat("hh:mm a",
-            Locale.ENGLISH).format(Date(dt*1000))
-           // val dateNow = Calendar.getInstance().time
+            val updateAt = getString(R.string.updated) + SimpleDateFormat(
+                "hh:mm a",
+                Locale.ENGLISH
+            ).format(Date(dt * 1000))
+
             val tempMin = "Min: ${weatherEntity.main.temp_min.toInt()}°"
             val tempMax = "Max: ${weatherEntity.main.temp_max.toInt()}°"
             val icon = weatherEntity.weather[0].icon
             val iconUrl = "https://openweathermap.org/img/w/$icon.png"
             val sunrise = weatherEntity.sys.sunrise
-            val sunriseFormat = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunrise*1000))
+            val sunriseFormat =
+                SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunrise * 1000))
             val sunset = weatherEntity.sys.sunset
-            val sunsetFormat = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunset*1000))
+            val sunsetFormat =
+                SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunset * 1000))
             val wind = "${weatherEntity.wind.speed} km/h"
             val pressure = "${weatherEntity.main.pressure} mb"
             val humidity = "${weatherEntity.main.pressure}%"
-            val feelsLike = getString(R.string.sensacion) + weatherEntity.main.feels_like.toInt() + unitSymbol
+            val feelsLike =
+                getString(R.string.sensacion) + weatherEntity.main.feels_like.toInt() + unitSymbol
             binding.apply {
                 tvAddress.text = addres
                 tvDate.text = updateAt
@@ -106,7 +111,7 @@ fun petition(){
                 tvStatus.text = status
                 tvTempMin.text = tempMin
                 tvTempMax.text = tempMax
-                tvSunrise.text=sunriseFormat
+                tvSunrise.text = sunriseFormat
                 tvSunset.text = sunsetFormat
                 tvWind.text = wind
                 tvPressure.text = pressure
@@ -118,18 +123,19 @@ fun petition(){
                 cardContainer.isVisible = true
                 showViews(false, true)
             }
-        }catch (exception:Exception){
+        } catch (exception: Exception) {
             showError("Ha oucrrido un error")
-            showViews(false,true)
+            showViews(false, true)
         }
 
     }
 
-    private fun showViews(progresVisible:Boolean, imageVisible:Boolean){
+    private fun showViews(progresVisible: Boolean, imageVisible: Boolean) {
         binding.progressBarIndicator.isVisible = progresVisible
         binding.ivSun.isVisible = imageVisible
     }
-    private fun showError(message2:String){
-        Toast.makeText(this,message2,Toast.LENGTH_LONG).show()
+
+    private fun showError(message2: String) {
+        Toast.makeText(this, message2, Toast.LENGTH_LONG).show()
     }
 }
