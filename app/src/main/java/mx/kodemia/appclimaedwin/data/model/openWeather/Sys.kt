@@ -1,4 +1,4 @@
-package mx.kodemia.appclimaedwin.model
+package mx.kodemia.appclimaedwin.data.model.openWeather
 
 data class Sys(
     val sunrise: Long,

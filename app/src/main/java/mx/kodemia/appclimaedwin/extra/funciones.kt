@@ -2,14 +2,17 @@ package mx.kodemia.appclimaedwin.extra
 
 import android.app.Activity
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
 import android.view.Gravity
 import android.widget.FrameLayout
-import com.google.android.material.snackbar.Snackbar
 
-fun mensajeEmergente(activity: Activity, mensaje: String){
+import com.google.android.material.snackbar.Snackbar
+import mx.kodemia.appclimaedwin.R
+
+fun messageEmer(activity: Activity, mensaje: String){
     val snackbar = Snackbar.make(activity.findViewById(android.R.id.content),mensaje, Snackbar.LENGTH_LONG)
     val view = snackbar.view
     val params = snackbar.view.layoutParams as FrameLayout.LayoutParams
@@ -42,3 +45,5 @@ fun isOnline(context: Context): Boolean{
     }
     return false
 }
+
+
