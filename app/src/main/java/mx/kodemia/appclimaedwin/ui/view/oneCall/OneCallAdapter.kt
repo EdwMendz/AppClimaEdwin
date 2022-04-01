@@ -37,7 +37,6 @@ class OneCallAdapter(val context: Context, val current: List<Current>) :
 
         fun render(current:Current){
             val icon = current.weather.first().icon.replace('n','d')
-            val iconResource = context.resources.getIdentifier("ic_weather_$icon","drawable",context.packageName)
             val dateFormatter = SimpleDateFormat("hh:mm a", Locale.ENGLISH)
             val hour = dateFormatter.format(Date(current.dt*1000))
             binding.apply {

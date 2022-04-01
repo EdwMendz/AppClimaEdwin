@@ -36,13 +36,6 @@ class OnecallActivityView : AppCompatActivity() {
                 getString(R.string.units),
                 getString(R.string.lang),apiKey)
 
-
-        //lat,//"30.489772",
-        //                lon,//"-99.771335",
-        //                units,//"metric",
-        //                lang,//lang//"sp",
-        //                apiId//"1b96dc7f7bd358dc23b5d5926d7d2572"
-
         viewModel.oneCallEntity.observe(this) { oneCall ->
             val dateFormatter = SimpleDateFormat("dd MMMM, yyyy", Locale.ENGLISH)
             val updatedAt = dateFormatter.format(Date(oneCall.current.dt * 1000))
@@ -64,12 +57,6 @@ class OnecallActivityView : AppCompatActivity() {
 
         }
     }
-//    private fun initPredictionsRecyclerView(predictions: List<Current>){
-//    binding.recyclerViewNextHours.apply {
-//        layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-//        setHasFixedSize(true)
-//        adapter = PredictionCardAdapter(this.context, predictions)
-
     private fun initBinding() {
         binding = ActivityOneCallBinding.inflate(layoutInflater)
         setContentView(binding.root)
