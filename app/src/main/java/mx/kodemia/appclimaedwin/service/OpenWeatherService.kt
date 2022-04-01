@@ -2,7 +2,6 @@ package mx.kodemia.appclimaedwin.service
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import mx.kodemia.appclimaedwin.R
 import mx.kodemia.appclimaedwin.core.RetrofitInstance
 import mx.kodemia.appclimaedwin.data.model.oneCall.CityEntity
 import mx.kodemia.appclimaedwin.data.model.oneCall.OneCallEntity
@@ -26,43 +25,30 @@ class OpenWeatherService {
 
 
     //Service de current
-    suspend fun getDatosWeather(id: Long,
-                                units: String?,
-                                lang: String?,
-                                appID: String): Response<WeatherEntity> {
-
+    suspend fun getDatosWeather(id: Long, units: String?, lang: String?, apiKey: String): Response<WeatherEntity> {
         return withContext(Dispatchers.IO) {
-            val respuesta = retrofitWeather.getWheterById(id,units,lang,appID)
-                //3523202L, "metric", "sp",
-                //"1b96dc7f7bd358dc23b5d5926d7d2572"
+            val respuesta = retrofitWeather.getWheterById(id,units,lang,apiKey)
             respuesta
         }
     }
 
     //Service de OneCall
-    suspend fun getDatosOneCall( lat: String,
-                                 lon: String,
-                                 units: String?,
-                                 lang: String?,
-                                 apiId: String): Response<OneCallEntity> {
+    suspend fun getDatosOneCall(lat: String, lon: String, units: String?, lang: String?, apiKey: String): Response<OneCallEntity> {
         return withContext(Dispatchers.IO) {
             val respuesta = retrofitOneCall.getOneCallByLatLng(
-                lat,//"30.489772",
-                lon,//"-99.771335",
-                units,//"metric",
-                lang,//lang//"sp",
-                apiId//"1b96dc7f7bd358dc23b5d5926d7d2572"
+                lat, lon, units, lang, apiKey
             )
             respuesta
         }
     }
 
     //Service de ObtenerCity
-    suspend fun getCityNameByLatLng(latitude: String, longitude: String): Response<List<CityEntity>> {
+    //Me falto un poco de tiempo :(
+    suspend fun getCityNameByLatLng(latitude: String, longitude: String, apiKey:String): Response<List<CityEntity>> {
         return withContext(Dispatchers.IO) {
 //        var result: CityEntity? = null
             val respuesta = retrofitCity.getCitiesByLatLng(
-                latitude, longitude, "1b96dc7f7bd358dc23b5d5926d7d2572"
+                latitude, longitude, apiKey
             )
             respuesta
         }

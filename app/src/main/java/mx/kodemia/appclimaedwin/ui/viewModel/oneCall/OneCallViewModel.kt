@@ -25,11 +25,7 @@ class OneCallViewModel: ViewModel() {
     /*Se realiza la peticion a la API,  MainActivitiViewModel Recibe la respuesta
     * despues se manda a la MainActivityView */
 
-    fun getDatosOneCall(lat: String,
-                        lon: String,
-                        units: String?,
-                        lang: String?,
-                        apiId: String) {
+    fun getDatosOneCall(lat: String, lon: String, units: String?, lang: String?, apiId: String) {
         viewModelScope.launch {
             cargando.postValue(true)
             val response = serviceWeather.getDatosOneCall(lat,lon,units,lang,apiId)

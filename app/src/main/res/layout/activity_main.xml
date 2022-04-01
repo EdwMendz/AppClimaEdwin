@@ -477,7 +477,6 @@
 
 
             <com.google.android.material.button.MaterialButton
-                app:cornerRadius="20dp"
                 android:id="@+id/btn_inicio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -485,11 +484,12 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="25dp"
-                android:backgroundTint="#A10618"
+                android:backgroundTint="#60220F"
                 android:text="@string/ver_m_s"
                 android:textColor="#FFFEFE"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                app:cornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
