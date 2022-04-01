@@ -13,9 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
-        android:text="Pronosticos de la siguiente semana "
-        android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textStyle="bold"
+
+        android:text="@string/pronostico_del_d_a"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
         android:textAllCaps="true"
         android:layout_margin="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,10 +29,11 @@
         android:id="@+id/rv_onecall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.165" />
 </androidx.constraintlayout.widget.ConstraintLayout>

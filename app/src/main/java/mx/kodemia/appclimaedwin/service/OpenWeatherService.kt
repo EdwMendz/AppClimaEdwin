@@ -14,6 +14,7 @@ import retrofit2.Response
 
 
 class OpenWeatherService {
+
     //Se instancia el servicio de retrofit con la peticion de WeatherService
     private val retrofitWeather =
         RetrofitInstance.getRetrofitWeather().create(ApiWeaterService::class.java)
@@ -25,23 +26,32 @@ class OpenWeatherService {
 
 
     //Service de current
-    suspend fun getDatosWeather(): Response<WeatherEntity> {
+    suspend fun getDatosWeather(id: Long,
+                                units: String?,
+                                lang: String?,
+                                appID: String): Response<WeatherEntity> {
+
         return withContext(Dispatchers.IO) {
-            val respuesta = retrofitWeather.getWheterById(
-                3523202L, "metric", "sp",
-                "1b96dc7f7bd358dc23b5d5926d7d2572"
-            )
+            val respuesta = retrofitWeather.getWheterById(id,units,lang,appID)
+                //3523202L, "metric", "sp",
+                //"1b96dc7f7bd358dc23b5d5926d7d2572"
             respuesta
         }
     }
 
     //Service de OneCall
-    suspend fun getDatosOneCall(): Response<OneCallEntity> {
+    suspend fun getDatosOneCall( lat: String,
+                                 lon: String,
+                                 units: String?,
+                                 lang: String?,
+                                 apiId: String): Response<OneCallEntity> {
         return withContext(Dispatchers.IO) {
             val respuesta = retrofitOneCall.getOneCallByLatLng(
-                "30.489772",
-                "-99.771335", "metric", "sp",
-                "1b96dc7f7bd358dc23b5d5926d7d2572"
+                lat,//"30.489772",
+                lon,//"-99.771335",
+                units,//"metric",
+                lang,//lang//"sp",
+                apiId//"1b96dc7f7bd358dc23b5d5926d7d2572"
             )
             respuesta
         }

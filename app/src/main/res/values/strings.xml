@@ -21,4 +21,10 @@
     <string name="prediccion">Prediccion</string>
     <string name="valor">valor</string>
     <string name="formatted_temp">%1$s°</string>
+    <string name="pronostico_del_d_a">Pronostico del Día</string>
+    <string name="lat">30.489772</string>
+    <string name="lon">-99.771335</string>
+    <string name="units">metric</string>
+    <string name="lang">sp</string>
+
 </resources>

@@ -15,23 +15,24 @@ import java.io.IOException
 class OneCallViewModel: ViewModel() {
     private val  serviceWeather = OpenWeatherService()
 
-    private var latitude = ""
-    private var longitude = ""
 
     //LiveData
     val error = MutableLiveData<String>()
     val cargando = MutableLiveData<Boolean>()
     val oneCallEntity = MutableLiveData<OneCallEntity>()
-    val button = MutableLiveData<Button>()
 
 
     /*Se realiza la peticion a la API,  MainActivitiViewModel Recibe la respuesta
     * despues se manda a la MainActivityView */
 
-    fun getDatosOneCall() {
+    fun getDatosOneCall(lat: String,
+                        lon: String,
+                        units: String?,
+                        lang: String?,
+                        apiId: String) {
         viewModelScope.launch {
             cargando.postValue(true)
-            val response = serviceWeather.getDatosOneCall()
+            val response = serviceWeather.getDatosOneCall(lat,lon,units,lang,apiId)
             //Validacion
             try {
                 if (response.isSuccessful){

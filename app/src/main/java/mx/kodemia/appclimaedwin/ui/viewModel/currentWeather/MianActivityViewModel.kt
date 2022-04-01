@@ -26,10 +26,13 @@ class MianActivityViewModel : ViewModel() {
     /*Se realiza la peticion a la API,  MainActivitiViewModel Recibe la respuesta
     * despues se manda a la MainActivityView */
 
-    fun getWeather() {
+    fun getWeather(id: Long,
+                   units: String?,
+                   lang: String?,
+                   appID: String) {
         viewModelScope.launch {
             cargando.postValue(true)
-            val response = serviceWeather.getDatosWeather()
+            val response = serviceWeather.getDatosWeather(id,units,lang,appID)
             //Validacion
             try {
                 if (response.isSuccessful){

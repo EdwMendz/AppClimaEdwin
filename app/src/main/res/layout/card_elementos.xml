@@ -19,11 +19,12 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:backgroundTint="#444147">
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_bg">
 
             <TextView
                 android:id="@+id/tv_nombre"
@@ -76,7 +77,7 @@
                 android:layout_marginBottom="108dp"
                 android:text="@string/valor"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tv_estatus1"
                 app:layout_constraintHorizontal_bias="0.515"
@@ -87,6 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:textSize="30sp"
                 android:text="@string/prediccion"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="@+id/tv_estatus1"

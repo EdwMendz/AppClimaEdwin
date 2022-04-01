@@ -35,7 +35,8 @@ class MainActivityView : AppCompatActivity() {
 
 
     private fun observadores() {
-        viewModel.getWeather()
+        val id:Long = 3523202L
+        viewModel.getWeather(id,getString(R.string.units),getString(R.string.lang),getString(R.string.api_key))
         //Progresbar
         viewModel.cargando.observe(this) { cargando ->
             cargando(cargando)
@@ -88,9 +89,7 @@ class MainActivityView : AppCompatActivity() {
                 tvFeelsLike.text = feelsLike
 
                 ivLogo1.load(iconUrl)
-//                detailsContainer.isVisible = true
-//                cardContainer.isVisible = true
-//                showViews(false, true)
+
 
             }
             //peticion

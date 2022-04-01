@@ -41,9 +41,12 @@ class OneCallAdapter(val context: Context, val current: List<Current>) :
             val dateFormatter = SimpleDateFormat("hh:mm a", Locale.ENGLISH)
             val hour = dateFormatter.format(Date(current.dt*1000))
             binding.apply {
-                ivOneCall.load(iconResource)
+
                 tvPrediccion.text = hour
                 tvPrediccionValor.text = context.getString(R.string.formatted_temp, current.temp.toString())
+                val iconUrl = "https://openweathermap.org/img/w/$icon.png"
+                ivOneCall.load(iconUrl)
+
             }
 
         }

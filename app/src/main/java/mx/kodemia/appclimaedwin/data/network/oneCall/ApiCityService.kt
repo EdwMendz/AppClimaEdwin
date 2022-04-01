@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiCityService {
-    @GET("geo/1.0/reverse")
+    @GET("geo/1.0/direct")
     suspend fun getCitiesByLatLng(
         @Query("lat") lat: String,
         @Query("lon") lon: String,

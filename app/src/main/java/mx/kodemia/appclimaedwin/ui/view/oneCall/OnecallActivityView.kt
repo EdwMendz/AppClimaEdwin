@@ -24,21 +24,45 @@ class OnecallActivityView : AppCompatActivity() {
     }
 
     private fun observadores() {
-        viewModel.getDatosOneCall()
-        viewModel.oneCallEntity.observe(this){oneCall->
+        val apiKey:String = getString(R.string.api_key)
+        val lat: String = getString(R.string.lat)
+        getString(R.string.lon)
+        getString(R.string.units)
+        getString(R.string.lang)
+
+
+        viewModel.getDatosOneCall(lat,
+                getString(R.string.lon),
+                getString(R.string.units),
+                getString(R.string.lang),apiKey)
+
+
+        //lat,//"30.489772",
+        //                lon,//"-99.771335",
+        //                units,//"metric",
+        //                lang,//lang//"sp",
+        //                apiId//"1b96dc7f7bd358dc23b5d5926d7d2572"
+
+        viewModel.oneCallEntity.observe(this) { oneCall ->
             val dateFormatter = SimpleDateFormat("dd MMMM, yyyy", Locale.ENGLISH)
-            val updatedAt = dateFormatter.format(Date(oneCall.current.dt*1000))
+            val updatedAt = dateFormatter.format(Date(oneCall.current.dt * 1000))
             llenarReciclerView(oneCall.hourly)
         }
     }
 
     private fun llenarReciclerView(datosOne: List<Current>) {
         binding.apply {
-            rvOnecall.hasFixedSize()
-            rvOnecall.layoutManager = LinearLayoutManager(this@OnecallActivityView)
-            rvOnecall.adapter = OneCallAdapter(this@OnecallActivityView,datosOne)
-        }
+            with(rvOnecall) {
+                setHasFixedSize(true)
+                layoutManager = LinearLayoutManager(
+                    this@OnecallActivityView,
+                    LinearLayoutManager.VERTICAL,
+                    false
+                )
+                adapter = OneCallAdapter(this@OnecallActivityView, datosOne)
+            }
 
+        }
     }
 //    private fun initPredictionsRecyclerView(predictions: List<Current>){
 //    binding.recyclerViewNextHours.apply {
